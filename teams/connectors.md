@@ -24,10 +24,9 @@ The Office 365 Connector card provides a flexible layout with multiple sections,
 
 ![Example of an Office 365 Connector card](images/Cards/o365connector.png)
 
-See the [Actionable message card reference](https://docs.microsoft.com/en-us/outlook/actionable-messages/card-reference) for details about card fields and actions. Teams currently does not support the following:
+See the [Actionable message card reference](https://docs.microsoft.com/en-us/outlook/actionable-messages/card-reference) for details about card fields and actions.
 
-* Fields: `heroImage`
-* Actions: `HttpPOST` and `ActionCard`
+>**Note:** Teams currently does not support the `heroImage` field in Connector cards.
 
 You can use the `O365ConnectorCard` class in the [Microsoft Teams extensions for the Bot Builder SDK](code.md#microsoft-teams-extensions-for-the-bot-builder-sdk) to send this card from your bot.
 
