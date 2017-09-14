@@ -15,7 +15,7 @@ Basic conversation is handled through the Bot Framework Connector, a single REST
 Your bot can send rich text, pictures, and cards. Users can send rich text and pictures to your bot. You can specify the type of content your bot can handle in the Microsoft Teams settings page for your bot.
 
 | Format | From user to bot  | From bot to user |  Notes |
-| --- | --- | --- | --- |
+| --- | :---: | :---: | --- |
 | Rich text | ✔ | ✔ |  |
 | Pictures | ✔ | ✔ | Maximum 1024×1024 and 1 MB in PNG, JPEG, or GIF format; animated GIF not officially supported |
 | Cards | ✘ | ✔ | Teams currently supports hero, thumbnail, and Office 365 Connector cards |
@@ -37,25 +37,134 @@ Microsoft Teams supports the following formatting options:
 
 ## Formatting text content
 
-Microsoft Teams supports a subset of Markdown and XML (HTML) formatting tags, with the following limitations:
+Microsoft Teams supports a subset of Markdown and XML (HTML) formatting tags.
+
+Currently, text-only messages do not support table formatting.
 
 * Rich cards support formatting in the text property only, not in the title or subtitle properties
-* Rich cards do not support Markdown
-* Messages and cards do not support table formatting
+* Rich cards do not support Markdown or table formatting
 
-| Style | Text-only message | Rich cards (XML only) | Example | Markdown | XML (HTML) |
-| --- | --- | --- | --- | --- | --- |
-| bold | ✔ | ✘ | **text** | `**text**` | `<strong>text</strong>` |
-| italic | ✔ | ✔ | *text* | `*text*` | `<em>text</em>` |
-| header (levels 1&ndash;5) | ✘ | ✔ | **Text** | &mdash; | `<h3>Text</h3>` |
-| strikethrough | ✘ | ✔ | ~~text~~ | &mdash; | `<strike>text</strike>` |
-| horizontal rule | ✘ | ✘ | <hr> | &mdash; | &mdash; |
-| unordered list | ✘ | ✔ | <ul><li>text</li><li>text</li></ul> | &mdash; | `<ul><li>text</li><li>text</li></ul>` |
-| ordered list | ✘ | ✔ | <ol><li>text</li><li>text</li></ol> | &mdash; | `<ol><li>text</li><li>text</li></ol>` |
-| preformatted text | ✔ | ✔ | `text` | `` `text` `` | `<pre>text</pre>` |
-| blockquote | ✘ | ✔ | <blockquote>text</blockquote> | &mdash; | `<blockquote>text</blockquote>` |
-| hyperlink | ✔ | ✔ | [Bing](https://www.bing.com/) | `[Bing](https://www.bing.com/)` | `<a href="https://www.bing.com/">Bing</a>` |
-| image link | ✔ | ✘ | <img src="http://aka.ms/Fo983c" alt="Duck on a rock"></img> | `![Duck on a rock](http://aka.ms/Fo983c)` | `<img src="http://aka.ms/Fo983c" alt="Duck on a rock"></img>` |
+### Text-only messages
+
+| Style                     | Desktop | iOS | Android | 
+| ---                       | :---: | :---: | :---: |
+| bold                      | ✔ | ✔ | ✔ |
+| italic                    | ✔ | ✔ | ✔ |
+| header (levels 1&ndash;3) | ✘ | ✘ | ✘ |
+| strikethrough             | ✔ | ✔ | ✘ |
+| horizontal rule           | ✘ | ✘ | ✘ |
+| unordered list            | ✔ | ✘ | ✘ |
+| ordered list              | ✔ | ✘ | ✘ |
+| preformatted text         | ✔ | ✔ | ✔ |
+| blockquote                | ✔ | ✔ | ✔ |
+| hyperlink                 | ✔ | ✔ | ✔ |
+| image link                | ✔ | ✔ | ✔ |
+
+### Cards
+
+Currently, the following limitations apply to rich cards:
+
+* Rich cards support formatting in the text property only, not in the title or subtitle properties
+* Rich cards do not support Markdown or table formatting
+
+<table>
+	<tr>
+		<td></td>
+		<th colspan="3">Rich cards (XML only)</th>
+		<th colspan="3">Connector cards (markdown)</th>
+		<th colspan="3">Connector cards (XML)</th>
+	</tr>
+	<tr>
+		<th>Style</th>
+		<td>Desktop</td><td>iOS</td><td>Android</td>
+		<td>Desktop</td><td>iOS</td><td>Android</td>
+		<td>Desktop</td><td>iOS</td><td>Android</td>
+	</tr>
+	<tr>
+		<td>bold</td>
+		<td align="center">✔</td><td align="center">✘</td><td align="center">✔</td>
+		<td align="center">✔</td><td align="center">✘</td><td align="center">✔</td>
+		<td align="center">✔</td><td align="center">✘</td><td align="center">✔</td>
+	</tr>
+	<tr>
+		<td>italic</td>
+		<td align="center">✔</td><td align="center">✔</td><td align="center">✔</td>
+		<td align="center">✔*</td><td align="center">✘</td><td align="center">✔*</td>
+		<td align="center">✔</td><td align="center">✘</td><td align="center">✔</td>
+	</tr>
+	<tr>
+		<td>header (levels 1&ndash;3)</td>
+		<td align="center"></td><td align="center"></td><td align="center"></td>
+		<td align="center"></td><td align="center"></td><td align="center"></td>
+		<td align="center"></td><td align="center"></td><td align="center"></td>
+	</tr>
+	<tr>
+		<td>strikethrough</td>
+		<td align="center"></td><td align="center"></td><td align="center"></td>
+		<td align="center"></td><td align="center"></td><td align="center"></td>
+		<td align="center"></td><td align="center"></td><td align="center"></td>
+	</tr>
+	<tr>
+		<td>horizontal rule</td>
+		<td align="center"></td><td align="center"></td><td align="center"></td>
+		<td align="center"></td><td align="center"></td><td align="center"></td>
+		<td align="center"></td><td align="center"></td><td align="center"></td>
+	</tr>
+	<tr>
+		<td>unordered list</td>
+		<td align="center"></td><td align="center"></td><td align="center"></td>
+		<td align="center"></td><td align="center"></td><td align="center"></td>
+		<td align="center"></td><td align="center"></td><td align="center"></td>
+	</tr>
+	<tr>
+		<td>ordered list</td>
+		<td align="center"></td><td align="center"></td><td align="center"></td>
+		<td align="center"></td><td align="center"></td><td align="center"></td>
+		<td align="center"></td><td align="center"></td><td align="center"></td>
+	</tr>
+	<tr>
+		<td>preformatted text</td>
+		<td align="center"></td><td align="center"></td><td align="center"></td>
+		<td align="center"></td><td align="center"></td><td align="center"></td>
+		<td align="center"></td><td align="center"></td><td align="center"></td>
+	</tr>
+	<tr>
+		<td>blockquote</td>
+		<td align="center"></td><td align="center"></td><td align="center"></td>
+		<td align="center"></td><td align="center"></td><td align="center"></td>
+		<td align="center"></td><td align="center"></td><td align="center"></td>
+	</tr>
+	<tr>
+		<td>hyperlink</td>
+		<td align="center"></td><td align="center"></td><td align="center"></td>
+		<td align="center"></td><td align="center"></td><td align="center"></td>
+		<td align="center"></td><td align="center"></td><td align="center"></td>
+	</tr>
+	<tr>
+		<td>image link</td>
+		<td align="center"></td><td align="center"></td><td align="center"></td>
+		<td align="center"></td><td align="center"></td><td align="center"></td>
+		<td align="center"></td><td align="center"></td><td align="center"></td>
+	</tr>
+</table>
+
+\*Renders as bold
+
+### Examples of text formatting
+
+| Style | Example | Markdown | XML (HTML) |
+| --- | --- | --- | --- |
+| bold | **text** | `**text**` | `<strong>text</strong>` |
+| italic | *text* | `*text*` | `<em>text</em>` |
+| header (levels 1&ndash;3) | **Text** | `### Text` | `<h3>Text</h3>` |
+| strikethrough | ~~text~~ | `~~text~~` | `<strike>text</strike>` |
+| horizontal rule | <hr> | `---` | `<hr>` |
+| unordered list | <ul><li>text</li><li>text</li></ul> | `* text`<br>`* text` | `<ul><li>text</li><li>text</li></ul>` |
+| ordered list | <ol><li>text</li><li>text</li></ol> | `1. text`<br>`2. text` | `<ol><li>text</li><li>text</li></ol>` |
+| preformatted text | `text` | `` `text` `` | `<pre>text</pre>` |
+| blockquote | <blockquote>text</blockquote> | `>text` | `<blockquote>text</blockquote>` |
+| hyperlink | [Bing](https://www.bing.com/) | `[Bing](https://www.bing.com/)` | `<a href="https://www.bing.com/">Bing</a>` |
+| image link | <img src="http://aka.ms/Fo983c" alt="Duck on a rock"></img> | `![Duck on a rock](http://aka.ms/Fo983c)` | `<img src="http://aka.ms/Fo983c" alt="Duck on a rock"></img>` |
 
 ## Picture messages
 
