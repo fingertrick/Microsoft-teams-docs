@@ -26,7 +26,18 @@ Each Connector card can display a maximum of 10 sections; each section can conta
 
 >**Note:** Any additional sections, images, or actions in a message do not appear.
 
-For details about Connector card fields and actions, see the **[Actionable message card reference](https://docs.microsoft.com/en-us/outlook/actionable-messages/card-reference)**. The only Connector card fields that Microsoft Teams does not currently support are as follows:
+All text fields support Markdown and HTML formatting. You can control which sections use Markdown or HTML by setting the `markdown` property in a message. By default, `markdown` is set to `true`; if you want to use HTML instead, set `markdown` to `false`.
+
+If you specify the `themeColor` property, it overrides the `accentColor` property in the app manifest.
+
+To specify the rendering style for `activityImage`, you can set `activityImage` as follows.
+
+| Value | Description |
+| --- | --- |
+| `avatar` | Default; `activityImage` will be cropped as a circle |
+| `article` | `activityImage` will be displayed as a rectangle and retain its aspect ratio |
+
+For all other details about Connector card properties, see the **[Actionable message card reference](https://docs.microsoft.com/en-us/outlook/actionable-messages/card-reference)**. The only Connector card properties that Microsoft Teams does not currently support are as follows:
 
 * `heroImage`
 * `hideOriginalBody`
@@ -130,13 +141,34 @@ This message produces the following card in the channel.
 
 ## Creating actionable messages
 
-The example in the preceding section includes three visible buttons on the card. Each button initiates an action&mdash;in this case, enter text, select a date, or choose a value from a list.
+The example in the preceding section includes three visible buttons on the card. Each button is defined in the `potentialAction` property of the message by using `ActionCard` actions, each containing an input type: a text field, a date picker, or a multichoice list. Each `ActionCard` action has an associated action&mdash;in the example, `HttpPOST`.
 
----
+Connector cards support three types of actions:
 
-***TK***  
+* `ActionCard`&emsp;Presents one or more input types and associated actions
+* `HttpPOST`&emsp;Issues a POST request to a URL
+* `OpenUri*`&emsp;Opens a URI in a separate browser or app; optionally targets different URIs based on operating systems
 
----
+(A fourth action, `ViewAction`, is still supported but no longer needed; use `OpenUri` instead.)
+
+The `ActionCard` action supports three input types:
+
+* `TextInput`&emsp;A single-line or multiline text field with an optional length limit
+* `DateInput`&emsp;A date selector with an optional time selector
+* `MultichoiceInput`&emsp;A enumerated list of choices offering either a single selection or multiple selections
+
+`MultichoiceInput` supports a `style` property that controls whether the list initially appears fully expanded. The default value of `style` depends on the value of `isMultiSelect`.
+
+| `isMultiSelect` | `style` default |
+| --- | --- |
+| `false` or not specified | `compact` |
+| `true` | `expanded` |
+
+If you want a multiselect list initially displayed in the compact style, you must specify both `"isMultiSelect": true` and `"style": true`.
+
+>**Note:** Specifying `compact` for the `style` property in Microsoft Teams is the same as specifying `normal` for the `style` property in Microsoft Outlook.
+
+For all other details about Connector card actions, see **[Actions](https://docs.microsoft.com/en-us/outlook/actionable-messages/card-reference#actions)** in the actionable message card reference.
 
 ## Setting up a custom incoming webhook
 
