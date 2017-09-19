@@ -146,8 +146,8 @@ The example in the preceding section includes three visible buttons on the card.
 Connector cards support three types of actions:
 
 * `ActionCard`&emsp;Presents one or more input types and associated actions
-* `HttpPOST`&emsp;Issues a POST request to a URL
-* `OpenUri*`&emsp;Opens a URI in a separate browser or app; optionally targets different URIs based on operating systems
+* `HttpPOST`&emsp;Sends a POST request to a URL
+* `OpenUri`&emsp;Opens a URI in a separate browser or app; optionally targets different URIs based on operating systems
 
 (A fourth action, `ViewAction`, is still supported but no longer needed; use `OpenUri` instead.)
 
