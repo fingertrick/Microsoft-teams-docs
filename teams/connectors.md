@@ -199,7 +199,14 @@ To distribute your Connector, you need to register by using the [Connectors Deve
 
 <img alt="Screenshot of enabling the Connector for Microsoft Teams" src="images/Connectors/connector_developer_portal.png" height="185" width="336">
 
-You can download the auto-generated Teams app manifest from the portal. The following manifest.json file contains the basic elements needed to test and submit your app.
+>**Important:** After you choose **Save** in the Connectors Developer Dashboard, your Connector is registered. Do not choose **Publish to Store** (which appears after you choose **Save**); if you want to publish your Connector in the Office Store, follow the instructions in [Publish your Microsoft Teams app to the Office Store](submission.md).
+
+You can download the auto-generated Teams app manifest from the portal. Before you can use it to test or publish your app, though, you must do the following:
+
+* Include two icons, following the instructions in [Icons](createpackage.md#icons).
+* Modify the `icons` portion of the manifest to refer to the file names of the icons instead of URLs.
+
+The following manifest.json file contains the basic elements needed to test and submit your app.
 
 >**Note:** Replace `id` and `connectorId` in the following example with the GUID of your Connector.
 
@@ -223,8 +230,8 @@ You can download the auto-generated Teams app manifest from the portal. The foll
     "short": "This is a small sample app we made for you!"
   },
   "icons": {
-    "outline": "https://outlook.office.com/connectors/Content/Images/IncomingWebhook.jpg",
-    "color": "https://outlook.office.com/connectors/Content/Images/IncomingWebhook.jpg"
+    "outline": "sampleapp-outline.png",
+    "color": "sampleapp-color.png"
   },
   "connectors": [
     {
@@ -245,7 +252,7 @@ You can download the auto-generated Teams app manifest from the portal. The foll
 
 ## Testing your Connector
 
-To test your Connector, sideload it to a team as you would with any other app. You can create a .zip package using the manifest file from the Connectors Developer Dashboard.
+To test your Connector, sideload it to a team as you would with any other app. You can create a .zip package using the manifest file from the Connectors Developer Dashboard (modified as directed in the preceding section) and the two icon files.
 
 After you sideload the app, open the Connectors list from any channel. Scroll to the bottom to see your app in the **Sideloaded** section.
 
